@@ -1,33 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { useParams } from "react-router-dom";
 import { Row } from "../../common/Flex";
-import { theme } from "../../../styles";
+import { useDetailPostInfoQuery } from "../../../services/query.service";
+import dayjs from "dayjs";
+import { getColor } from "../../../helpers/getColor";
+import { getPostType } from "../../../helpers/getPostType";
 
 const PostLayout = () => {
   const { id } = useParams();
+  const [post, setPost] = useState<any>({});
+  const { data, isSuccess } = useDetailPostInfoQuery(+(id || 1));
+
+  useEffect(() => {
+    if (isSuccess) setPost(data);
+    // eslint-disable-next-line
+  }, [isSuccess, window]);
 
   return (
     <S.Container>
       <S.PostHeader>
-        <S.PostTitle>반에 거울이 있으면 좋겠어요!</S.PostTitle>
+        <S.PostTitle>{post.title}</S.PostTitle>
         <Row alignItems="center" gap="6px">
-          <S.PostAuthor>2111 원설아</S.PostAuthor>
-          <S.PostCreatedAt>2024. 01. 08.</S.PostCreatedAt>
+          <S.PostAuthor>
+            {post.author?.grade}
+            {post.author?.class_number}
+            {`${post.author?.student_number}`.padStart(2, "0")}{" "}
+            {post.author?.name}
+          </S.PostAuthor>
+          <S.PostCreatedAt>
+            {dayjs(post.createdAt).format("YYYY.MM.DD.")}
+          </S.PostCreatedAt>
         </Row>
         <S.SeparatorLine />
       </S.PostHeader>
-      <S.PostType color={theme.blue.basic}>건의사항</S.PostType>
-      <S.PostContent>
-        반에 거울이 없어서 화장실까지 이동해야 하는 게 불편한 것 같아요. 우리
-        반에도 거울이 있으면 좋겠습니다. 거울이 있으면 훨씬 편리할 것 같아요.
-        간편하게 확인할 때는 머리 상태나 그런 간단한 것들을 확인하는데,
-        화장실까지 가는 건 조금 먼 것 같아요.
-      </S.PostContent>
+      <S.PostType color={getColor(post.postType)}>
+        {getPostType(post.postType)}
+      </S.PostType>
+      <S.PostContent>{post.content}</S.PostContent>
       <S.AnswerBox>
         <S.AnswerTitle>답변</S.AnswerTitle>
         <S.AnswerContent>
-          답변이 없어요. 건의사항을 검토하고 있나 봐요!
+          {!post.answers.length
+            ? "답변이 없어요. 건의사항을 검토하고 있나 봐요!"
+            : post.answers[0].content}
         </S.AnswerContent>
       </S.AnswerBox>
       <S.CommentBox>
@@ -36,15 +52,21 @@ const PostLayout = () => {
         <S.CommentWriteButton>작성</S.CommentWriteButton>
       </S.CommentBox>
       <S.CommentListBox>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <S.CommentListItem key={i}>
+        {post.comments.map((item: any) => (
+          <S.CommentListItem key={item.id}>
             <Row alignItems="center" gap="6px">
-              <S.CommentAuthor>2111 원설아</S.CommentAuthor>
-              <S.CommentCreatedAt>2024. 01. 08.</S.CommentCreatedAt>
+              <S.CommentAuthor>
+                {" "}
+                {item.author.grade}
+                {item.author.class_number}
+                {`${item.author.student_number}`.padStart(2, "0")}{" "}
+                {item.author.name}
+              </S.CommentAuthor>
+              <S.CommentCreatedAt>
+                {dayjs(item.createdAt).format("YYYY.MM.DD.")}
+              </S.CommentCreatedAt>
             </Row>
-            <S.CommentContent>
-              저 개발 하고 싶습니다! 오늘 6교시 쉬는 시간에 뵈러 가도 될까요?
-            </S.CommentContent>
+            <S.CommentContent>{item.content}</S.CommentContent>
           </S.CommentListItem>
         ))}
       </S.CommentListBox>

@@ -110,6 +110,7 @@ export const PostListItem = styled.div`
   gap: 8px;
   background-color: ${theme.gray[50]};
   border-radius: 20px;
+  cursor: pointer;
 `;
 
 export const PostListItemTitle = styled.h3`
