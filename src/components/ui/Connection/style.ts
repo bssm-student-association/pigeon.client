@@ -25,6 +25,7 @@ export const PostListItemBox = styled.div`
 
 export const PostListItem = styled.div`
   width: 49.2%;
+  cursor: pointer;
   ${flex.COLUMN_FLEX};
   padding: 2.5vw;
   gap: 8px;
