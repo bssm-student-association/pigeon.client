@@ -124,3 +124,10 @@ export const CommentCreatedAt = styled.span`
 export const CommentContent = styled.p`
   ${font.p1};
 `;
+
+export const PostDelete = styled.span`
+  ${font.p1};
+  color: ${theme.red};
+  margin-left: auto;
+  cursor: pointer;
+`;
