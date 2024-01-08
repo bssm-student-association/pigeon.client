@@ -38,7 +38,10 @@ const MainLayout = () => {
         비둘기를 통해 원하는 글을 전달해 봐요.
       </S.Description>
       <S.WriteButtonBox>
-        <S.WriteBox color={theme.blue.light}>
+        <S.WriteBox
+          onClick={() => navigate("/post/write?category=suggestion")}
+          color={theme.blue.light}
+        >
           <S.WriteTextBox>
             <S.WriteTitle>건의사항 작성</S.WriteTitle>
             <S.WritePostType color={theme.blue.basic}>
@@ -47,7 +50,10 @@ const MainLayout = () => {
           </S.WriteTextBox>
           <S.WriteMainLogo src="/suggestion.png" />
         </S.WriteBox>
-        <S.WriteBox color={theme.green.light}>
+        <S.WriteBox
+          onClick={() => navigate("/post/write?category=project")}
+          color={theme.green.light}
+        >
           <S.WriteTextBox>
             <S.WriteTitle>
               교내 프로젝트 <br />
@@ -57,7 +63,10 @@ const MainLayout = () => {
           </S.WriteTextBox>
           <S.WriteMainLogo src="/project.png" />
         </S.WriteBox>
-        <S.WriteBox color={theme.yellow.light}>
+        <S.WriteBox
+          onClick={() => navigate("/post/write?category=mentoring")}
+          color={theme.yellow.light}
+        >
           <S.WriteTextBox>
             <S.WriteTitle>
               코드리뷰/멘토링

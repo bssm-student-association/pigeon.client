@@ -60,22 +60,13 @@ export const useWritePostMutation = () => {
 };
 
 export const useDeletePostMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation(
     async (id: number) =>
       (
         await instance.delete(`/post/remove/${id}`, {
           headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
         })
-      ).data,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["usePostDetail"]);
-        queryClient.invalidateQueries(["usePostSummary"]);
-        queryClient.invalidateQueries(["usePost"]);
-      },
-    }
+      ).data
   );
 };
 
@@ -91,7 +82,6 @@ export const useWriteAnswerMutation = () => {
 };
 
 export const useEditAnswerMutation = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async (answer: AnswerRequestDto) =>
       (
@@ -102,33 +92,18 @@ export const useEditAnswerMutation = () => {
             headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
           }
         )
-      ).data,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["usePostDetail"]);
-        queryClient.invalidateQueries(["usePostSummary"]);
-        queryClient.invalidateQueries(["usePost"]);
-      },
-    }
+      ).data
   );
 };
 
 export const useRemoveAnswerMutation = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async (id: number) =>
       (
         await instance.delete(`/answer/remove/${id}`, {
           headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
         })
-      ).data,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["usePostDetail"]);
-        queryClient.invalidateQueries(["usePostSummary"]);
-        queryClient.invalidateQueries(["usePost"]);
-      },
-    }
+      ).data
   );
 };
 
@@ -144,7 +119,6 @@ export const useWriteCommentMutation = () => {
 };
 
 export const useEditCommentMutation = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async (comment: CommentRequestDto) =>
       (
@@ -155,32 +129,17 @@ export const useEditCommentMutation = () => {
             headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
           }
         )
-      ).data,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["usePostDetail"]);
-        queryClient.invalidateQueries(["usePostSummary"]);
-        queryClient.invalidateQueries(["usePost"]);
-      },
-    }
+      ).data
   );
 };
 
 export const useRemoveCommentMutation = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async (id: number) =>
       (
         await instance.delete(`/comment/remove/${id}`, {
           headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
         })
-      ).data,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["usePostDetail"]);
-        queryClient.invalidateQueries(["usePostSummary"]);
-        queryClient.invalidateQueries(["usePost"]);
-      },
-    }
+      ).data
   );
 };
