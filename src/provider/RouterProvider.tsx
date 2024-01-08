@@ -8,6 +8,7 @@ import Footer from "../components/common/Footer";
 import styled from "styled-components";
 import Modal from "../@modal/layouts";
 import Suggestion from "../pages/Suggestion";
+import Connection from "../pages/Connection";
 
 const RouterProvider = () => {
   return (
@@ -18,6 +19,7 @@ const RouterProvider = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/post/suggestion" element={<Suggestion />} />
+          <Route path="/post/connection" element={<Connection />} />
           <Route path="/oauth/bsm" element={<BsmLogin />} />
           <Route path="/oauth/google" element={<GoogleLogin />} />
         </Routes>
