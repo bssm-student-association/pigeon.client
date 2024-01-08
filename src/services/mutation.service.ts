@@ -63,7 +63,12 @@ export const useDeletePostMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async (id: number) => (await instance.post(`/post/remove/${id}`)).data,
+    async (id: number) =>
+      (
+        await instance.delete(`/post/remove/${id}`, {
+          headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
+        })
+      ).data,
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["usePostDetail"]);
@@ -113,7 +118,7 @@ export const useRemoveAnswerMutation = () => {
   return useMutation(
     async (id: number) =>
       (
-        await instance.post(`/answer/edit/${id}`, null, {
+        await instance.delete(`/answer/remove/${id}`, {
           headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
         })
       ).data,
@@ -166,7 +171,7 @@ export const useRemoveCommentMutation = () => {
   return useMutation(
     async (id: number) =>
       (
-        await instance.post(`/comment/remove/${id}`, null, {
+        await instance.delete(`/comment/remove/${id}`, {
           headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
         })
       ).data,
