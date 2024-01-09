@@ -8,15 +8,17 @@ export const useSummaryPostQuery = () => {
   );
 };
 
-export const useDetailPostByPostType = (postType: string) => {
+export const useDetailPostByPostTypeQuery = (postType: string) => {
   return useQuery(
-    ["usePostDetail"],
+    ["usePostDetail", postType],
     async () =>
       (await instance.get(`/post/detail/${postType.toUpperCase()}`)).data
   );
 };
 
-export const useDetailPostInfo = (id: number) => {
-  return useQuery(["usePost"], async () => await instance.get(`/post/${id}`))
-    .data;
+export const useDetailPostInfoQuery = (id: number) => {
+  return useQuery(
+    ["usePost", id],
+    async () => (await instance.get(`/post/${id}`)).data
+  );
 };

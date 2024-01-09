@@ -20,7 +20,9 @@ const useUser = () => {
   } = useQuery<User>(
     ["useUser"],
     async () => {
-      const { data } = await instance.post("/user");
+      const { data } = await instance.get("/user", {
+        headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
+      });
       return data;
     },
     { enabled: !!localStorage.getItem(TOKEN.ACCESS) }

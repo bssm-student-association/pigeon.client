@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { theme } from "../../../styles";
 import { useModal } from "../../../@modal/hooks";
 import NoticeModal from "../../../@modal/layouts/NoticeModal";
 import { Row } from "../../common/Flex";
+import { useSummaryPostQuery } from "../../../services/query.service";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const MainLayout = () => {
   const { openModal } = useModal();
+  const navigate = useNavigate();
+  const [post, setPost] = useState<any>({
+    suggestion: [],
+    project: [],
+    mentoring: [],
+  });
+
+  const { data, isSuccess } = useSummaryPostQuery();
+
+  useEffect(() => {
+    if (isSuccess) setPost(data);
+    // eslint-disable-next-line
+  }, [isSuccess, window]);
 
   const handleNoticeModalOpenClick = () => {
     openModal({
@@ -68,19 +84,27 @@ const MainLayout = () => {
           </S.PostListMoreViewButton>
         </S.PostListHeader>
         <S.PostListItemBox>
-          {Array.from({ length: 4 }).map((_, i) => (
-            <S.PostListItem key={i}>
-              <S.PostListItemTitle>
-                반에 거울이 있으면 좋겠어요!
-              </S.PostListItemTitle>
+          {post.suggestion.map((item: any) => (
+            <S.PostListItem
+              onClick={() => navigate(`/post/${item.id}`)}
+              key={item.id}
+            >
+              <S.PostListItemTitle>{item.title}</S.PostListItemTitle>
               <Row alignItems="center" gap="8px">
-                <S.PostListItemAuthor>원설아님</S.PostListItemAuthor>
-                <S.PostListItemCreatedAt>2024. 01. 07.</S.PostListItemCreatedAt>
+                <S.PostListItemAuthor>
+                  {item.author.grade}
+                  {item.author.class_number}
+                  {`${item.author.student_number}`.padStart(2, "0")}{" "}
+                  {item.author.name}
+                </S.PostListItemAuthor>
+                <S.PostListItemCreatedAt>
+                  {dayjs(item.createdAt).format("YYYY.MM.DD.")}
+                </S.PostListItemCreatedAt>
               </Row>
               <S.PostListItemContent>
-                반에 거울이 없어서 화장실까지 이동해야 하는 게 불편한 것 같아요.
-                우리 반에도 거울이 있으면 좋겠습니다. 거울이 있으면 훨씬 편리할
-                것 같아요. 간편하게 확인할 때는...
+                {item.content.length > 90
+                  ? item.content.slice(0, 90)
+                  : item.content}
               </S.PostListItemContent>
             </S.PostListItem>
           ))}
@@ -96,19 +120,27 @@ const MainLayout = () => {
           </S.PostListMoreViewButton>
         </S.PostListHeader>
         <S.PostListItemBox>
-          {Array.from({ length: 4 }).map((_, i) => (
-            <S.PostListItem key={i}>
-              <S.PostListItemTitle>
-                반에 거울이 있으면 좋겠어요!
-              </S.PostListItemTitle>
+          {post.project.map((item: any) => (
+            <S.PostListItem
+              onClick={() => navigate(`/post/${item.id}`)}
+              key={item.id}
+            >
+              <S.PostListItemTitle>{item.title}</S.PostListItemTitle>
               <Row alignItems="center" gap="8px">
-                <S.PostListItemAuthor>원설아님</S.PostListItemAuthor>
-                <S.PostListItemCreatedAt>2024. 01. 07.</S.PostListItemCreatedAt>
+                <S.PostListItemAuthor>
+                  {item.author.grade}
+                  {item.author.class_number}
+                  {`${item.author.student_number}`.padStart(2, "0")}{" "}
+                  {item.author.name}
+                </S.PostListItemAuthor>
+                <S.PostListItemCreatedAt>
+                  {dayjs(item.createdAt).format("YYYY.MM.DD.")}
+                </S.PostListItemCreatedAt>
               </Row>
               <S.PostListItemContent>
-                반에 거울이 없어서 화장실까지 이동해야 하는 게 불편한 것 같아요.
-                우리 반에도 거울이 있으면 좋겠습니다. 거울이 있으면 훨씬 편리할
-                것 같아요. 간편하게 확인할 때는...
+                {item.content.length > 90
+                  ? item.content.slice(0, 90)
+                  : item.content}
               </S.PostListItemContent>
             </S.PostListItem>
           ))}
@@ -124,19 +156,27 @@ const MainLayout = () => {
           </S.PostListMoreViewButton>
         </S.PostListHeader>
         <S.PostListItemBox>
-          {Array.from({ length: 4 }).map((_, i) => (
-            <S.PostListItem key={i}>
-              <S.PostListItemTitle>
-                반에 거울이 있으면 좋겠어요!
-              </S.PostListItemTitle>
+          {post.mentoring.map((item: any) => (
+            <S.PostListItem
+              onClick={() => navigate(`/post/${item.id}`)}
+              key={item.id}
+            >
+              <S.PostListItemTitle>{item.title}</S.PostListItemTitle>
               <Row alignItems="center" gap="8px">
-                <S.PostListItemAuthor>원설아님</S.PostListItemAuthor>
-                <S.PostListItemCreatedAt>2024. 01. 07.</S.PostListItemCreatedAt>
+                <S.PostListItemAuthor>
+                  {item.author.grade}
+                  {item.author.class_number}
+                  {`${item.author.student_number}`.padStart(2, "0")}{" "}
+                  {item.author.name}
+                </S.PostListItemAuthor>
+                <S.PostListItemCreatedAt>
+                  {dayjs(item.createdAt).format("YYYY.MM.DD.")}
+                </S.PostListItemCreatedAt>
               </Row>
               <S.PostListItemContent>
-                반에 거울이 없어서 화장실까지 이동해야 하는 게 불편한 것 같아요.
-                우리 반에도 거울이 있으면 좋겠습니다. 거울이 있으면 훨씬 편리할
-                것 같아요. 간편하게 확인할 때는...
+                {item.content.length > 90
+                  ? item.content.slice(0, 90)
+                  : item.content}
               </S.PostListItemContent>
             </S.PostListItem>
           ))}

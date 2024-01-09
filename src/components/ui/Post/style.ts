@@ -75,6 +75,7 @@ export const CommentTextArea = styled.textarea`
   ${font.p1};
   width: 100%;
   height: 82px;
+  padding: 10px 14px;
   resize: none;
   border-radius: 10px;
   border: 1px solid ${theme.gray[200]};

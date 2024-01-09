@@ -4,12 +4,10 @@ export default interface UserType {
   nickname: string;
   email: string;
   name: string;
-  profile_url: string;
-  profile_image: string;
   authority: string;
   role: string;
   enroll: number;
   grade: number;
-  classNum: number;
-  studentNumber: number;
+  class_number: number;
+  student_number: number;
 }
