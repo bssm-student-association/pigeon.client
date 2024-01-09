@@ -2,12 +2,12 @@ import axios from "axios";
 import { TOKEN } from "../constants/token.constant";
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: "http://10.150.149.168:8080/api",
 });
 
 const refresh = async () => {
   try {
-    const { data } = await instance.put("/api/auth/refresh", null, {
+    const { data } = await instance.put("/auth/refresh", null, {
       headers: {
         Refresh_token: `${localStorage.getItem(TOKEN.REFRESH)}`,
       },
