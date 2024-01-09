@@ -30,6 +30,7 @@ export const WriteBox = styled.div<{ color: string }>`
   width: 100%;
   height: 32vh;
   border-radius: 20px;
+  cursor: pointer;
 `;
 
 export const WriteTextBox = styled.div`
