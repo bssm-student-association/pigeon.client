@@ -1,5 +1,4 @@
 import axios from "axios";
-import ERROR from "../constants/error.constant";
 import refresh from "./refresh";
 
 export const instance = axios.create({
@@ -11,7 +10,8 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.data.code === ERROR.CODE.TOKEN_403_2) {
+    if (!originalRequest.trigger) {
+      originalRequest.trigger = true;
       await refresh();
       return instance(originalRequest);
     }

@@ -57,6 +57,7 @@ export const AnswerTitle = styled.h2`
 `;
 
 export const AnswerContent = styled.p`
+  width: 100%;
   ${font.p1};
 `;
 
@@ -102,8 +103,13 @@ export const CommentListItem = styled.div`
   width: 100%;
   padding: 2.5vh;
   border-bottom: 1px solid ${theme.gray[200]};
-  ${flex.COLUMN_FLEX};
+  ${flex.FLEX};
   gap: 8px;
+`;
+
+export const Remove = styled.img`
+  margin-left: auto;
+  cursor: pointer;
 `;
 
 export const CommentAuthor = styled.span`
