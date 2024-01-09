@@ -1,15 +1,22 @@
 import React, { useState, ChangeEvent } from "react";
 import styled, { css } from "styled-components";
 import { flex, font, theme } from "../styles";
+
 import PageTitle from "../components/common/PageTitle";
 import Input from "../components/common/Input";
 import TextArea from "../components/common/TextArea";
+import Button from "../components/common/Button";
+
 import Category from "../components/ui/Post/Category";
+import categoryListData from "../data/post/categoryListData";
+
 
 const Post = () => {
     const [type, setType] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+
+    const [currentCategory, setCurrentCategory] = useState("");
 
     const handleTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
       setType(e.target.value);
@@ -23,73 +30,88 @@ const Post = () => {
         setContent(e.target.value);
     };
 
+    const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setCurrentCategory(e.target.value);
+    };
+
+
     return (
         <Layout>
-            <PageTitle imgSrc="WriteEmoji" title="글 작성하기" subTitle="원하는 글을 작성해 주세요." />
+            <ContentBox>
+                <PageTitle imgSrc="WriteEmoji" title="글 작성하기" subTitle="원하는 글을 작성해 주세요." />
 
-            <RadioBox>
-            <TagText>카테고리</TagText>
-            <CategoryList>
-                {categoryListData.map((category) => {
-                if (category === CATEGORY.NOTICE && !isAdmin) return;
-                return (
-                    <Category
-                    key={category}
-                    id={category}
-                    name="category"
-                    onChange={handleChangeCategory}
-                    selected={category === currentCategory}
-                    />
-                );
-                })}
-            </CategoryList>
-                {/* <TagText>카테고리</TagText>
-                    <RadioBtn>
-                        <input 
-                            type="radio" 
-                            id="suggestion" 
-                            name="type" 
-                            value="SUGGESTION"
-                            onChange={handleTypeChange}
-                        />
-                        <label htmlFor="suggestion">카테고리</label>
-                    </RadioBtn>
-                    <RadioBtn>
-                        <input 
-                            type="radio" 
-                            id="project" 
-                            name="type"
-                            value="PROJECT"
-                            onChange={handleTypeChange}
-                        />
-                        <label htmlFor="project">교내 프로젝트 수요</label>
-                    </RadioBtn>
-                    <RadioBtn>
-                        <input  
-                            type="radio" 
-                            id="mentoring" 
-                            name="type"
-                            value="MENTORING"
-                            onChange={handleTypeChange}
-                        />
-                        <label htmlFor="mentoring">코드리뷰/멘토링</label>
-                    </RadioBtn> */}
-                </RadioBox>
+                <ContentInputBox>
+                    <RowBox>
+                        <LabelText>카테고리</LabelText>
+                        <CategoryList>
+                            {categoryListData.map((category) => {
+                                return (
+                                    <Category
+                                        key={category}
+                                        id={category}
+                                        name="category"
+                                        label={category}
+                                        selected={currentCategory}
+                                        onChange={handleCategoryChange}
+                                    />
+                                );
+                            })}
+                        </CategoryList>
+                        {/* <LabelText>카테고리</LabelText>
+                            <RadioBtn>
+                                <input 
+                                    type="radio" 
+                                    id="suggestion" 
+                                    name="type" 
+                                    value="SUGGESTION"
+                                    onChange={handleTypeChange}
+                                />
+                                <label htmlFor="suggestion">카테고리</label>
+                            </RadioBtn>
+                            <RadioBtn>
+                                <input 
+                                    type="radio" 
+                                    id="project" 
+                                    name="type"
+                                    value="PROJECT"
+                                    onChange={handleTypeChange}
+                                />
+                                <label htmlFor="project">교내 프로젝트 수요</label>
+                            </RadioBtn>
+                            <RadioBtn>
+                                <input  
+                                    type="radio" 
+                                    id="mentoring" 
+                                    name="type"
+                                    value="MENTORING"
+                                    onChange={handleTypeChange}
+                                />
+                                <label htmlFor="mentoring">코드리뷰/멘토링</label>
+                            </RadioBtn> */}
+                    </RowBox>
 
-            <InputBox>
-                <TagText>제목</TagText>
-                <Input 
-                    name="title"
-                    value={title}
-                    width="73rem"
-                    onChange={handleTitleChange}
-                />
-            </InputBox>
-            
-            <TextAreaBox>
-                <TagText>내용</TagText>
-                <TextArea />
-            </TextAreaBox>
+                    <RowBox>
+                        <LabelText>제목</LabelText>
+                        <Input 
+                            name="title"
+                            value={title}
+                            width="73rem"
+                            onChange={handleTitleChange}
+                        />
+                    </RowBox>
+                    
+                    <RowBox>
+                        <LabelText>내용</LabelText>
+                        <TextArea />
+                    </RowBox>
+                </ContentInputBox>
+
+                <RowBox>
+                    <Button onClick={() => {}}>취소</Button>
+                    <Button onClick={() => {}}>저장</Button>
+                </RowBox>
+                
+            </ContentBox>
         </Layout>
     );
 };
@@ -101,29 +123,37 @@ const Layout = styled.div`
   padding: 7.813rem 0 11.813rem 0;
 `;
 
-const TagText = styled.div`
+const ContentBox = styled.div`
+    ${flex.COLUMN_START};
+    gap: 60px;
+`;
+
+const RowBox = styled.div`
+    ${flex.HORIZONTAL};
+    gap: 33px;
+`;
+
+const ContentInputBox = styled.div`
+    ${flex.COLUMN_CENTER};
+    gap: 54px;
+`
+
+const LabelText = styled.div`
     ${font.p1};
 `;
 
-const RadioBox = styled.div`
+const CategoryList = styled.div`
+    ${flex.CENTER};
+    gap: 9px;
 `;
-
 
 const RadioBtn = styled.div`
     input[type=radio] {
         display: none;
     }
     
-    padding: 9px 24px;
-    border-radius: 20px;
+    padding: 0.563rem 1.5rem;
+    border-radius: 1.25rem;
     background-color: ${theme.gray50};
     border: 1px solid ${theme.gray200};
-`;
-
-const InputBox = styled.div`
-    
-`;
-
-const TextAreaBox = styled.div`
-    
 `;

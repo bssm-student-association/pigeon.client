@@ -2,11 +2,12 @@ import styled, { css } from "styled-components";
 import { theme, font } from "../../../styles";
 
 interface CategoryProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id?: string;
-  selected: boolean;
+    id?: string;
+    label: string;
+    selected: string;
 }
 
-const Category = ({ id, selected, ...props }: CategoryProps) => {
+const Category = ({ id, label, selected, ...props }: CategoryProps) => {
   return (
       <>
         <StyledCategory id={id} type="radio" {...props} />
@@ -21,7 +22,7 @@ const StyledCategory = styled.input`
   display: none;
 `;
 
-const StyledLabel = styled.label<{ selected: boolean }>`
+const StyledLabel = styled.label<{ selected: string }>`
   border: none;
   padding: 6px 16px;
   border-radius: 999px;
@@ -30,20 +31,32 @@ const StyledLabel = styled.label<{ selected: boolean }>`
   align-items: center;
   box-shadow: 0 0 10px 0 rgba(144, 144, 144, 0.1);
   ${font.btn3};
-  ${({ selected }) =>
-    selected
-      ? css`
-          background-color: ${theme.primary_blue};
-          color: ${theme.white};
-        `
-      : css`
-          background-color: ${theme.white};
-          color: ${theme.gray};
 
-          &:hover {
-            background-color: ${theme.on_tertiary};
-          }
-        `}
+  background-color: ${({ selected }) => {
+    if (selected === "SUGGESTION") {
+      return theme.light_blue;
+    }
+    if (selected === "PROJECT") {
+      return theme.light_green;
+    }
+    if (selected === "MENTORING") {
+      return theme.yellow;
+    }
+    return theme.gray50;
+  }};
+
+    border-color: ${({ selected }) => {
+        if (selected === "SUGGESTION") {
+            return `2px solid ${theme.blue}`;
+        }
+        if (selected === "PROJECT") {
+            return `2px solid ${theme.green}`;
+        }
+        if (selected === "MENTORING") {
+            return `2px solid ${theme.yellow}`;
+        }
+        return `2px solid ${theme.gray200}`;
+    }};
 `;
 
 export default Category;
