@@ -5,12 +5,12 @@ import Post from "../pages/Post";
 import BsmLogin from "../pages/BsmLogin";
 import GoogleLogin from "../pages/GoogleLogin";
 import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
-import styled from "styled-components";
 import Modal from "../@modal/layouts";
 import Suggestion from "../pages/Suggestion";
 import Connection from "../pages/Connection";
-import Post from "../pages/Post";
+import Write from "../pages/Write";
+import Footer from "../components/common/Footer";
+import styled from "styled-components";
 
 const RouterProvider = () => {
   return (
@@ -23,6 +23,7 @@ const RouterProvider = () => {
           <Route path="/post/suggestion" element={<Suggestion />} />
           <Route path="/post/connection" element={<Connection />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/post/write" element={<Write />} />
           <Route path="/oauth/bsm" element={<BsmLogin />} />
           <Route path="/oauth/google" element={<GoogleLogin />} />
         </Routes>
