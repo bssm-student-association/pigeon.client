@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
+import Post from "../pages/Post";
 import BsmLogin from "../pages/BsmLogin";
 import GoogleLogin from "../pages/GoogleLogin";
 import Header from "../components/common/Header";
