@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { getColor } from "../../../helpers/getColor";
 import { getPostType } from "../../../helpers/getPostType";
 import {
+  useDeletePostMutation,
   useRemoveAnswerMutation,
   useRemoveCommentMutation,
   useWriteAnswerMutation,
@@ -28,6 +29,7 @@ const PostLayout = () => {
   const { mutate: deleteComment } = useRemoveCommentMutation();
   const { mutate: writeAnswer } = useWriteAnswerMutation();
   const { mutate: deleteAnswer } = useRemoveAnswerMutation();
+  const { mutate: deletePost } = useDeletePostMutation();
 
   const handleWriteAnswerClick = () => {
     writeAnswer(
@@ -72,6 +74,9 @@ const PostLayout = () => {
           <S.PostCreatedAt>
             {dayjs(post.createdAt).format("YYYY.MM.DD.")}
           </S.PostCreatedAt>
+          <S.PostDelete onClick={() => deletePost(+(id || 1))}>
+            삭제
+          </S.PostDelete>
         </Row>
         <S.SeparatorLine />
       </S.PostHeader>

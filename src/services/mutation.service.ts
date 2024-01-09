@@ -4,6 +4,7 @@ import { TOKEN } from "../constants/token.constant";
 import { PostRequestDto } from "../types/PostRequestDto";
 import { AnswerRequestDto } from "../types/AnswerRequestDto";
 import { CommentRequestDto } from "../types/CommentRequestDto";
+import { useNavigate } from "react-router-dom";
 
 export const useBSMLoginMutation = () => {
   return useMutation(
@@ -60,13 +61,19 @@ export const useWritePostMutation = () => {
 };
 
 export const useDeletePostMutation = () => {
+  const navigate = useNavigate();
   return useMutation(
     async (id: number) =>
       (
         await instance.delete(`/post/remove/${id}`, {
           headers: { Authorization: localStorage.getItem(TOKEN.ACCESS) },
         })
-      ).data
+      ).data,
+    {
+      onSuccess: () => {
+        navigate("/");
+      },
+    }
   );
 };
 
