@@ -11,23 +11,20 @@ interface ButtonProps
   style?: React.CSSProperties;
 }
 
-function Button ({
-    children,
-    style
-  }: ButtonProps): JSX.Element {
-    return (
-      <StyledButton style={style}>
-        {children}
-      </StyledButton>
-    );
+function Button({ children, style, ...props }: ButtonProps): JSX.Element {
+  return (
+    <StyledButton {...props} style={style}>
+      {children}
+    </StyledButton>
+  );
 }
 
 export default Button;
 
 const StyledButton = styled.button<ButtonProps>`
-    color: black;
-    ${font.btn1};   
-    background-color: ${theme.gray100};
-    border-radius: 1.25rem;
-    padding: 1.125rem 1.688rem;
+  color: black;
+  ${font.btn1};
+  background-color: ${theme.gray[100]};
+  border-radius: 1.25rem;
+  padding: 1.125rem 1.688rem;
 `;
