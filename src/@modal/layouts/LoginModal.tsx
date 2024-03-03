@@ -16,12 +16,12 @@ const LoginModal = () => {
         <LoginButton href={process.env.REACT_APP_BSM_REDIRECT_URL}>
           BSM으로 로그인
         </LoginButton>
-        <TeacherLoginText>
+{/*         <TeacherLoginText>
           선생님이신가요?{" "}
           <a href={process.env.REACT_APP_GOOGLE_REDIRECT_URL}>
             Google로 로그인하기
           </a>
-        </TeacherLoginText>
+        </TeacherLoginText> */}
       </LoginBox>
     </Container>
   );
