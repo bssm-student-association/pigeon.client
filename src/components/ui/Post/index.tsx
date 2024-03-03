@@ -74,9 +74,11 @@ const PostLayout = () => {
           <S.PostCreatedAt>
             {dayjs(post.createdAt).format("YYYY.MM.DD.")}
           </S.PostCreatedAt>
-          <S.PostDelete onClick={() => deletePost(+(id || 1))}>
-            삭제
-          </S.PostDelete>
+          {isSameUser(post.author?.id) && (
+            <S.PostDelete onClick={() => deletePost(+(id || 1))}>
+              삭제
+            </S.PostDelete>
+          )}
         </Row>
         <S.SeparatorLine />
       </S.PostHeader>
@@ -106,7 +108,7 @@ const PostLayout = () => {
               post.answers[0].content
             )}
           </S.AnswerContent>
-          {isSameUser(post.answers[0]?.author?.id) && (
+          {!!post.answers.length && isSameUser(post.answers[0]?.author?.id) && (
             <S.Remove
               onClick={() => handleDeleteAnswerClick(post.answers[0].id)}
               src="/delete.svg"
