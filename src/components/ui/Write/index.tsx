@@ -26,6 +26,7 @@ const WriteLayout = () => {
       {
         onSuccess: () => {
           navigate(`/`);
+          window.location.reload();
           queryClient.invalidateQueries(["usePostSummary"]);
           queryClient.invalidateQueries(["usePostDetail", "suggestion"]);
           queryClient.invalidateQueries(["usePostSummary", "project"]);
