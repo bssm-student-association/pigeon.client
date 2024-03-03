@@ -3,7 +3,7 @@ import refresh from "./refresh";
 
 export const instance = axios.create({
   baseURL: "http://10.129.57.18:8080/api",
-  withCredentials: true,
+  withCredentials: false,
 });
 
 instance.interceptors.response.use(
