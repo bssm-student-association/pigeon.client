@@ -41,6 +41,7 @@ export const PostType = styled.div<{ color: string }>`
 
 export const PostContent = styled.p`
   ${font.p1};
+  white-space: pre-wrap;
 `;
 
 export const AnswerBox = styled.div`
