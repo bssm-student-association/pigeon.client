@@ -2,7 +2,7 @@ import axios from "axios";
 import { TOKEN } from "../constants/token.constant";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "http://10.129.57.18:8080/api",
 });
 
 const refresh = async () => {
