@@ -25,6 +25,9 @@ const Header = () => {
       <S.Navigation onClick={() => navigate("/post/connection")}>
         수요 · 요청글
       </S.Navigation>
+      <S.Navigation onClick={() => navigate("/post/write")}>
+        글쓰기
+      </S.Navigation>
       {!isLoggedIn ? (
         <S.Login onClick={handleOpenLoginModal}>로그인</S.Login>
       ) : (
