@@ -123,7 +123,7 @@ const MainLayout = () => {
       <S.PostListBox>
         <S.PostListHeader>
           <S.PostListTitle>🧑‍🏫‍ 이런 교내 프로젝트 원해요!</S.PostListTitle>
-          <S.PostListMoreViewButton to="/post/suggestion">
+          <S.PostListMoreViewButton to="/post/connection">
             더 보기
             <img src="/arrow.svg" alt="더보기" />
           </S.PostListMoreViewButton>
@@ -159,7 +159,7 @@ const MainLayout = () => {
       <S.PostListBox>
         <S.PostListHeader>
           <S.PostListTitle>⚡‍ 코드리뷰/멘토링 부탁드려요!</S.PostListTitle>
-          <S.PostListMoreViewButton to="/post/suggestion">
+          <S.PostListMoreViewButton to="/post/connection">
             더 보기
             <img src="/arrow.svg" alt="더보기" />
           </S.PostListMoreViewButton>
