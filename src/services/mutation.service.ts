@@ -72,6 +72,7 @@ export const useDeletePostMutation = () => {
     {
       onSuccess: () => {
         navigate("/");
+        window.location.reload();
       },
     }
   );

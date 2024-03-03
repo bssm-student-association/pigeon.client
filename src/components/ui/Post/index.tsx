@@ -53,7 +53,6 @@ const PostLayout = () => {
 
   const handleDeleteCommentClick = (commentId: number) => {
     deleteComment(commentId, { onSuccess: () => refetch() });
-    window.location.reload();
   };
 
   useEffect(() => {
